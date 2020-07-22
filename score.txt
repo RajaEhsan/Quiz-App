@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>score</title>
+    <!-- bootstrap css link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+    .card{
+        margin-top: 100px;
+        margin-left: 400px;
+        margin-bottom: 200px;
+    }
+    .card-header{
+        background-color: rgb(218, 238, 189);
+    }
+</style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                  Quiz Application JavaScript
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <h3 class="username">Well Done! Keep It Up<span class="name"></span></h3>
+                    <p class="userpoints">Your Score Is <span class="points"></span></p>
+                    
+                    
+                  </blockquote>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+
+
+    <script>
+        let points=sessionStorage.getItem("points");
+        document.querySelector(".points").innerHTML=points;
+    </script>
+</body>
+</html>

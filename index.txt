@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <!-- bootstrap css link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+    .row{
+        margin-left: 300px;
+        margin-top: 100px;
+margin-top: 10px;
+    }
+    .heading{
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+    #quest{
+        background-color: rgb(197, 226, 154);
+        border: 2px solid green;
+         margin:20px 30px 20px; /*top right&left bottom */
+        font-size: 20px;
+        font-weight: bold;
+    }
+    #questions{
+        border-bottom: 2px solid gray;
+    }
+    .option-group{
+        margin:20px 30px 20px; /*top right&left bottom */
+        font-size: 18px;
+    }
+    .option-group li:hover{
+        background-color:rgb(198, 215, 216);
+        
+    }
+    .btn-next{
+        color: black;
+        font-weight: bold;
+        margin: 20px 30px 20px;
+        font-size: 18px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    /* .active{
+        background-color: aqua;
+        color: black !important;
+    } */
+</style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card jumbotron main">
+                <div class="card-header heading">
+                    Quiz Application JavaScript
+                </div>
+                <div class="quiz-body">
+                    <div id="questions">
+                        <!-- <h2>What is the full form of ROM?</h2>
+                            <ul class="option-group">
+                            <li class="option">option 1</li>
+                            <li class="option">option 2</li>
+                            <li class="option">option 3</li>
+                            <li class="option">option 4</li>
+                        </ul> -->
+                    </div>
+                
+                    <button class="btn-next btn btn-success btn-md" onclick="next()">Next >></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        window.onload=function(){
+            show(0);
+        }
+        var questions=[
+            {
+                id:1,
+                question:"What is full form of RAM?",
+                answer:"Random Access Memory",
+                options:[
+                    "Random Access Memory",
+                    "Read Only Memory",
+                    "Randomly Allocated Memory",
+                    "None of The Above"
+                ]
+            },
+            {
+                id:2,
+                question:"What is full form of ROM?",
+                answer:"Read Only Memory",
+                options:[
+                    "Read Only Memory",
+                    "Random Access Memory",
+                    "Randomly Oriented Memory",
+                    "None of The Above"
+                ]
+            },
+            {
+                id:3,
+                question:"What is full form of SMIU?",
+                answer:"Sindh Madressatul Islam University",
+                options:[
+                    "Sindh Madressatul Islam University",
+                    "Sindh Mazdoor Intellectual Union",
+                    "Sindh Mehnatkash Intellectual Union",
+                    "None of the Above"
+                ]
+            },
+            {
+                id:4,
+                question:"A statement about what a company does is called?",
+                answer:"Its vision",
+                options:[
+                    "Its vision",
+                    "Its mission",
+                    "Its values",
+                    "Its value chain"
+                ]
+            }
+
+        ];
+        let question_count=0;
+        let point=0;
+        function next(){
+            if(question_count==questions.length-1){
+                location.href="score.html";
+                return;
+            }
+            let user_answer=document.querySelector("li.option.active").innerHTML;
+            //check ans by user
+            if(user_answer==questions[question_count].answer){
+                point+=10;
+                sessionStorage.setItem("points",point);
+                // console.log("right");
+            }
+            else{
+                console.log("wrong");
+            }
+            question_count++;
+            show(question_count);
+            // console.log(question_count);
+        }
+
+
+        function show(count){
+            var question=document.getElementById("questions");
+            // question.innerHTML="<h2>" + questions[count].question + "</h2>" ;
+            question.innerHTML=`
+                    <div id="quest" class="card-body rounded">Q${[count+1]}. ${questions[count].question} </div>
+                    <ul class="option-group list-group">
+                        <li class="option list-group-item">${questions[count].options[0]}</li>
+                        <li class="option list-group-item">${questions[count].options[1]}</li>
+                        <li class="option list-group-item">${questions[count].options[2]}</li>
+                        <li class="option list-group-item">${questions[count].options[3]}</li>
+                    </ul>
+            `;
+            toggleActive();
+        }
+
+
+        function toggleActive() {
+  let option = document.querySelectorAll("li.option");
+  for (let i = 0; i < option.length; i++) {
+    option[i].onclick = function() {
+    for(var j=0;j<option.length;j++){
+        if(option[j].classList.contains("active")){
+            option[j].classList.remove("active");
+        }
+    }
+      option[i].classList.add("active");
+    };
+  }
+}
+    </script>
+    <!-- bootstrap javascript link -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
